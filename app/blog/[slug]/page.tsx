@@ -1,8 +1,5 @@
 // app/blog/[slug]/page.tsx
 
-import {readFile} from "node:fs/promises";
-import {marked} from "marked";
-
 // 服务端组件可以使用async
 export default async function BlogPage({
                                            params,
@@ -11,8 +8,16 @@ export default async function BlogPage({
     params: { slug: string } // 接收url参数: (/blog/[slug] -> slug)
     searchParams: {}
 }) {
-    const text = await readFile(`./contents/${params.slug}.md`, 'utf8')
-    const html = marked(text)
+    // 请求后端数据
+    let res = await fetch(`http://localhost:3000/api/blogs/${params.slug}`, {
+        method: "GET"
+    })
+    let json = await res.json()
+    let html
+    if (json.error)
+        html = "Ooh! Something went wrong"
+    else
+        html = json.html
 
     return (
         // flex flex-row justify-center -> 内容居中
