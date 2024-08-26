@@ -3,6 +3,7 @@
 import {readFile} from "node:fs/promises";
 import {marked} from "marked";
 
+// 服务端组件可以使用async
 export default async function BlogPage({
                                            params,
                                            searchParams,
