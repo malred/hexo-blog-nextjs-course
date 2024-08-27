@@ -4,6 +4,7 @@ import {Inter} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footbar from "@/components/footbar";
+import {ThemeProvider} from "next-themes";
 
 // 这个是字体，暂时不用管
 const inter = Inter({subsets: ["latin"]});
@@ -20,12 +21,19 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-        <Navbar/>
-        {/*children就是子目录里的内容（包含子目录的layout和page）*/}
-        {children}
-        <Footbar/>
+        {/*提供主题状态*/}
+        <ThemeProvider
+            attribute="class" // 使用class来切换
+            defaultTheme="system" // 默认用系统设置
+            enableSystem // 允许根据系统当前主题模式更改
+        >
+            <Navbar/>
+            {/*children就是子目录里的内容（包含子目录的layout和page）*/}
+            {children}
+            <Footbar/>
+        </ThemeProvider>
         </body>
         </html>
     );

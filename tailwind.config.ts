@@ -2,6 +2,8 @@
 import type {Config} from "tailwindcss";
 
 const config: Config = {
+    // 通过类名的方式配置mode
+    darkMode: ['selector', '.dark'],
     content: [
         "./pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./components/**/*.{js,ts,jsx,tsx,mdx}",

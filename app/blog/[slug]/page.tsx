@@ -22,8 +22,13 @@ export default async function BlogPage({
     return (
         // flex flex-row justify-center -> 内容居中
         <div className={'w-screen flex flex-row justify-center'}>
-            {/* prose让文本中的标题有对应的样式 */}
-            <div className={'prose'} dangerouslySetInnerHTML={{__html: html}}></div>
+            {/*
+                prose让文本中的标题有对应的样式
+                dark:prose-invert是让prose适配黑暗主题
+             */}
+            <div className={`prose dark:prose-invert`}
+                 dangerouslySetInnerHTML={{__html: html}}>
+            </div>
         </div>
     )
 }
